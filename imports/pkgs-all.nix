@@ -4,8 +4,8 @@
   perSystem =
     { pkgs, ... }:
     {
-      packages = {
-        example2 = pkgs.callPackage ../pkgs/example2 { };
+      packages = with pkgs; {
+        vocabsieve = libsForQt5.callPackage ../pkgs/vocabsieve/package.nix { };
       };
     };
 }
