@@ -1,87 +1,89 @@
-[![Donate!][donate github]][github sponsors link]
-
 # My Custom Nixpkgs Overlay
 
-This repository serves as a template for creating your own collection of custom
-Nix expressions, akin to what is done in `nixpkgs`. It includes a `default`
-overlay that exposes all custom packages, facilitating their integration into
-other projects.
+This repository is built on the [my-own-nixpkgs](https://github.com/drupol/my-own-nixpkgs) template and serves as a collection for my custom Nix expressions, structured in a similar way as `nixpkgs`.
 
 ## Usage
 
-### Setting Up
+Add the following to your `nix` flake file to include this repository as an input:
 
-1. Fork this repository.
-2. Begin adding packages to the `pkgs/by-name` directory. Follow the
-   same approach as adding packages in `nixpkgs`. Similar to [RFC140], packages
-   added in this directory will be automatically discovered.
-   - Create a new directory for each package.
-   - Inside each directory, create a `package.nix` file.
-3. Optionally, you can add packages directly to the `pkgs/` directory and
-   manually update the bindings in the `imports/pkgs-all.nix` file.
+```nix
+inputs = {
+  nixpkgs-custom = {
+    url = "github:eljamm/nixpkgs-custom";
+    inputs.nixpkgs.follows = "nixpkgs";
+    # Uncomment this if your project uses flake-parts:
+    # inputs.flake-parts.follows = "flake-parts"; 
+  };
+};
+```
 
-### Integrating Your Repository as an Overlay
+Next, either integrate the packages using an `overlay` or a `custom package set`.
 
-To use this repository as an overlay in another project, follow these steps:
+### Integrating Packages as an Overlay
 
-1. **Add the Repository as an Input**:
+To use this repository in another project as an overlay, follow these steps:
 
-   Add the following to your `nix` file to include this repository as an input:
+1. **Include the Overlay in `pkgs`**:
 
-   ```nix
-   inputs = {
-       my-custom-nixpkgs.url = "repo-url";  # Replace "repo-url" with the actual URL to your repository
-   };
-   ```
+    When constructing `pkgs`, include the overlay as follows:
 
-2. **Include the Overlay in `pkgs`**:
+    ```nix
+    pkgs = import inputs.nixpkgs {
+      overlays = [
+        inputs.nixpkgs-custom.overlays.default
+      ];
+    };
+    ```
 
-   When constructing `pkgs`, include the overlay as follows:
+1. **Use Your Packages**:
 
-   ```nix
-   pkgs = import inputs.nixpkgs {
-     overlays = [
-       inputs.my-custom-nixpkgs.overlays.default
-     ];
-   };
-   ```
+    Access the packages in this project like this:
 
-3. **Use Your Packages**:
+    ```nix
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [
+        pkgs.hello
+        pkgs.custom-pkg
+      ];
+    }
+    ```
 
-   Access the packages in your project like this:
+### Integrating Packages as a Custom Package Set
 
-   ```nix
-   buildInputs = [ pkgs.example1 pkgs.example2 ];
-   ```
+Using this method may results in a faster build times compared to using overlays, but accessing packages will be different.
 
-[RFC140]: https://github.com/NixOS/rfcs/pull/140
+To use packages from a custom package set, follow these steps:
 
-### Examples
+1. **Pass packages to `specialArgs`**:
 
-Refer to the dummy projects `example1` and `example2` for practical examples of
-how packages can be structured.
+    Pass the packages to your host's `specialArgs`:
 
-## Going further
+    ```nix
+    nixosConfigurations = {
+      nixos = inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          pkgsCustom = inputs'.nixpkgs-custom.packages;
+        };
+      };
+    };
+    ```
 
-- Use the continuous integration service of your choice to build and test your
-  packages
-- Add a binary cache to your repository to speed up builds and avoid
-  recompilation using [Cachix](https://cachix.org/)
-- This project uses a flake framework, we recommend to use [flake-parts](https://flake.parts)
+1. **Use Your Packages**:
 
-## Contributing
+    Access the packages in this project like this:
 
-Feel free to contribute by sending pull requests. We are a usually very
-responsive team and we will help you going through your pull request from the
-beginning to the end.
+    ```nix
+    { pkgs, pkgsCustom, ... }:
+    {
+      environment.systemPackages = [
+        pkgs.hello
+        pkgsCustom.custom-pkg
+      ];
+    }
+    ```
 
-For some reasons, if you can't contribute to the code and willing to help,
-sponsoring is a good, sound and safe way to show us some gratitude for the hours
-we invested in this package.
+## Todo
 
-Sponsor me on [Github][github sponsors link] and/or any of [the
-contributors][6].
-
-[donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
-[github sponsors link]: https://github.com/sponsors/drupol
-[6]: https://github.com/drupol/my-own-nixpkgs/graphs/contributors
+- [ ] Set up CI/CD to test and build packages
+- [ ] Add a binary cache to speed up builds
