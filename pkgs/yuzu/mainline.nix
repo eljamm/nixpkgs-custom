@@ -39,6 +39,7 @@
   yasm,
   zlib,
   zstd,
+  vulkan-utility-libraries,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "yuzu";
@@ -76,6 +77,12 @@ stdenv.mkDerivation (finalAttrs: {
       popd
     '';
   };
+
+  # fix error: 'VK_DRIVER_ID_MESA_AGXV' was not declared in this scope
+  postPatch = ''
+    rm -r externals/Vulkan-Utility-Libraries
+    ln -s ${vulkan-utility-libraries.src} externals/Vulkan-Utility-Libraries
+  '';
 
   nativeBuildInputs = [
     cmake
