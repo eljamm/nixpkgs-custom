@@ -1,24 +1,17 @@
 {
-  description = "Description for the project";
+  description = "Custom Nixpkgs Repo";
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
   };
 
   outputs =
-    inputs@{ flake-parts, systems, ... }:
+    inputs@{ flake-parts, nixpkgs, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import systems;
+      systems = nixpkgs.lib.systems.flakeExposed;
 
-      imports = [
-        inputs.flake-parts.flakeModules.easyOverlay
-        inputs.pkgs-by-name-for-flake-parts.flakeModule
-        ./imports/overlay.nix
-        ./imports/formatter.nix
-        ./imports/pkgs-all.nix
-      ];
+      imports = with builtins; map (fn: ./imports/${fn}) (attrNames (readDir ./imports));
     };
 }
