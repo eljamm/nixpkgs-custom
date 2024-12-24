@@ -1,0 +1,24 @@
+name: Update flake
+on:
+  workflow_dispatch:
+  schedule:
+    # runs weekly at 10:10am on Sunday and Thursday
+    - cron: "10 10 * * 0,4"
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: nixbuild/nix-quick-install-action@v29
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          pr-title: "bump: update flake.lock"
+          pr-labels: | # Labels to be set on the PR
+            dependencies
+            automated
