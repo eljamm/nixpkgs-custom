@@ -49,7 +49,7 @@
     "patches-fish-367229": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-ZugQDFyX/oqzcH9buG5FuptWoSO61NsJi8BA377ZJvc=",
+        "narHash": "sha256-Pwq3/+qa2X2CTx+BYCtPSWddiO3MBMCA1YBJLW9C4ro=",
         "type": "file",
         "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/367229.patch"
       },
