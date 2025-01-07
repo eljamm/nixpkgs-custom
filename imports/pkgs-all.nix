@@ -1,8 +1,7 @@
 { ... }:
 {
-
   perSystem =
-    { pkgs, ... }:
+    { pkgs, pkgsPatched, ... }:
     {
       packages = with pkgs; rec {
         vocabsieve = libsForQt5.callPackage ../pkgs/vocabsieve/package.nix { };
@@ -13,6 +12,8 @@
         yuzu-ea = yuzuPackages.early-access;
         yuzu-early-access = yuzuPackages.early-access;
         yuzu-mainline = yuzuPackages.mainline;
+
+        inherit (pkgsPatched) fish umu-launcher;
       };
     };
 }
