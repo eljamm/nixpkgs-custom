@@ -4,9 +4,6 @@
   python3Packages,
   gst_all_1,
   qt5,
-  qtbase,
-  qtmultimedia,
-  wrapQtAppsHook,
 }:
 let
   pyqtgraph5 = python3Packages.pyqtgraph.override {
@@ -27,7 +24,7 @@ python3Packages.buildPythonApplication rec {
   };
 
   nativeBuildInputs = [
-    wrapQtAppsHook
+    qt5.wrapQtAppsHook
     gst_all_1.gst-libav
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
@@ -36,8 +33,8 @@ python3Packages.buildPythonApplication rec {
   ];
 
   buildInputs = [
-    qtbase
-    qtmultimedia
+    qt5.qtbase
+    qt5.qtmultimedia
   ];
 
   build-system = with python3Packages; [ setuptools ];
