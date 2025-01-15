@@ -49,7 +49,7 @@
     "patches-fish-367229": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-n1w8cfTDargDk9mnOM1ZJ021pcHc8LwLEhtVatdqtJE=",
+        "narHash": "sha256-clJd2+XoCbnP2jEAXixAr2T6GZ0s7llX0Wnq4NRM/pM=",
         "type": "file",
         "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/367229.patch"
       },
@@ -61,7 +61,7 @@
     "patches-umu-369259": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-j4o+L9B1HhyMj81MoeyjK7MPG0Xu0ExS2MW1g8DBghQ=",
+        "narHash": "sha256-DZ/zz2ix5R+hkD6P7Trd+PibWkYtIsa5wLmdJMnt5Ik=",
         "type": "file",
         "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/369259.patch"
       },
