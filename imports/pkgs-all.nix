@@ -1,7 +1,12 @@
 { ... }:
 {
   perSystem =
-    { pkgs, pkgsPatched, ... }:
+    {
+      pkgs,
+      pkgsPatched,
+      pkgsPatches,
+      ...
+    }:
     let
       # from https://github.com/NixOS/nixpkgs/pull/295587
       yuzuPackages = pkgs.callPackage ../pkgs/yuzu { };
@@ -15,7 +20,8 @@
         yuzu-early-access = yuzuPackages.early-access;
         yuzu-mainline = yuzuPackages.mainline;
 
-        inherit (pkgsPatched) fish umu-launcher;
+        inherit (pkgsPatched) umu-launcher;
+        inherit (pkgsPatches) fish;
       };
     };
 }

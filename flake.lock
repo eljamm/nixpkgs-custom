@@ -34,6 +34,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-fish": {
+      "locked": {
+        "lastModified": 1736947654,
+        "narHash": "sha256-2Jx6NvgVC1fvY4ekGhQ0qzYA1SqdT6NMcvdPVdSe30A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "420cc2d8908888261583a524419e4d1eeb35b79a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "fish",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1735774519,
@@ -89,6 +105,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-fish": "nixpkgs-fish",
         "patches-fish-367229": "patches-fish-367229",
         "patches-umu-369259": "patches-umu-369259",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts"
