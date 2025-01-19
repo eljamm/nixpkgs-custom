@@ -5,6 +5,8 @@ on:
     # runs weekly at 10:10am on Sunday and Thursday
     - cron: "10 10 * * 0,4"
 
+permissions: {}
+
 jobs:
   lockfile:
     runs-on: ubuntu-latest
