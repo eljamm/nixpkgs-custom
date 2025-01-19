@@ -65,7 +65,7 @@
     "patches-umu-369259": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-aeWkhXHnROBV3Qs2TTIXs1dvdDi+MVO57d9oewrRhpc=",
+        "narHash": "sha256-DIR7MhIVghEdqZGf/f6aTJqka4N8CxIeGIiUaIHMNlk=",
         "type": "file",
         "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/369259.patch"
       },
