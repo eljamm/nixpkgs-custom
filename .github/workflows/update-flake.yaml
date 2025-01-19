@@ -27,5 +27,5 @@ jobs:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
       - run: "gh pr merge --auto --merge ${PR_NUMBER}"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           PR_NUMBER: ${{ steps.update-flake.outputs.pull-request-number }}
