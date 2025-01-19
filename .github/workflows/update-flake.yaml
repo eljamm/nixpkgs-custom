@@ -16,10 +16,16 @@ jobs:
       - name: Install Nix
         uses: nixbuild/nix-quick-install-action@v29
       - name: Update flake.lock
+        id: update-flake
         uses: DeterminateSystems/update-flake-lock@main
         with:
-          pr-title: "bump: update flake.lock"
+          commit-msg: "bump: flake inputs"
+          pr-title: "bump: flake inputs"
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+      - run: "gh pr merge --auto --merge ${PR_NUMBER}"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.update-flake.outputs.pull-request-number }}
