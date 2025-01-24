@@ -14,7 +14,7 @@
     }:
     {
 
-      _module.args = rec {
+      _module.args = {
         pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [ inputs.self.overlays.default ];
@@ -24,14 +24,6 @@
         pkgsPatches = {
           inherit (inputs.nixpkgs-fish.legacyPackages.${system}) fish;
         };
-
-        pkgsPatched = import (pkgs.applyPatches {
-          name = "nixpkgs-patched-${inputs.nixpkgs.shortRev}";
-          src = inputs.nixpkgs;
-          patches = [
-            inputs.patches-umu-369259
-          ];
-        }) { inherit system; };
       };
 
       overlayAttrs = config.packages;

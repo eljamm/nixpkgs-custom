@@ -9,13 +9,6 @@
     # fish: 3.7.3 -> 4.0b1
     # https://github.com/NixOS/nixpkgs/pull/367229
     nixpkgs-fish.url = "github:NixOS/nixpkgs?ref=fish";
-
-    ## Patches ##
-    # umu-launcher: init
-    patches-umu-369259 = {
-      url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/369259.patch";
-      flake = false;
-    };
   };
 
   outputs =

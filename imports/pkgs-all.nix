@@ -3,7 +3,6 @@
   perSystem =
     {
       pkgs,
-      pkgsPatched,
       pkgsPatches,
       ...
     }:
@@ -20,7 +19,6 @@
         yuzu-early-access = yuzuPackages.early-access;
         yuzu-mainline = yuzuPackages.mainline;
 
-        inherit (pkgsPatched) umu-launcher;
         inherit (pkgsPatches) fish;
       };
     };
