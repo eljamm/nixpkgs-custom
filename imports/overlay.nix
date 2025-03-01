@@ -20,10 +20,6 @@
           overlays = [ ];
           config = { };
         };
-
-        pkgsPatches = {
-          inherit (inputs.nixpkgs-fish.legacyPackages.${system}) fish;
-        };
       };
 
       overlayAttrs = config.packages;
