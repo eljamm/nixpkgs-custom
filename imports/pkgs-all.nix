@@ -17,8 +17,6 @@
         yuzu-ea = yuzuPackages.early-access;
         yuzu-early-access = yuzuPackages.early-access;
         yuzu-mainline = yuzuPackages.mainline;
-
-        inherit (inputs.nixpkgs-fish.legacyPackages.${system}) fish;
       };
     };
 }
