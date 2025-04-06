@@ -34,4 +34,4 @@ jobs:
           PR_NUMBER: ${{ steps.update-flake.outputs.pull-request-number }}
   check:
     needs: lockfile
-    uses: ./.github/workflows/test-packages.yaml
+    uses: ./.github/workflows/check-packages.yaml
