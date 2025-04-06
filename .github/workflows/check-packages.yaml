@@ -1,5 +1,6 @@
 name: Check packages
 on:
+  push: { branches: ["master"] }
   workflow_call:
   workflow_dispatch:
 
