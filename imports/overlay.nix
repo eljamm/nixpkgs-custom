@@ -18,7 +18,9 @@
         pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [ ];
-          config = { };
+          config = {
+            allowBroken = true;
+          };
         };
       };
 
