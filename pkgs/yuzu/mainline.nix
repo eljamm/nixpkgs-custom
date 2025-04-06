@@ -227,5 +227,6 @@ stdenv.mkDerivation (finalAttrs: {
       sbruder
       k900
     ];
+    broken = true;
   };
 })

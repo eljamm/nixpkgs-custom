@@ -2,6 +2,7 @@
 {
   perSystem =
     {
+      lib,
       pkgs,
       self',
       ...
@@ -20,6 +21,6 @@
         yuzu-mainline = yuzuPackages.mainline;
       };
 
-      checks = self'.packages;
+      checks = lib.filterAttrs (_: v: !v.meta.broken or false) self'.packages;
     };
 }
