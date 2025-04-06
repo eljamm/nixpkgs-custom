@@ -32,3 +32,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           PR_NUMBER: ${{ steps.update-flake.outputs.pull-request-number }}
+      - name: Test packages
+        run: "nix flake check"

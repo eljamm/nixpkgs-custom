@@ -3,6 +3,7 @@
   perSystem =
     {
       pkgs,
+      self',
       ...
     }:
     let
@@ -18,5 +19,7 @@
         yuzu-early-access = yuzuPackages.early-access;
         yuzu-mainline = yuzuPackages.mainline;
       };
+
+      checks = self'.packages;
     };
 }
