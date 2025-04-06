@@ -86,4 +86,4 @@ To use packages from a custom package set, follow these steps:
 ## Todo
 
 - [x] Set up CI/CD to test and build packages
-- [ ] Add a binary cache to speed up builds
+- [x] Add a binary cache to speed up builds

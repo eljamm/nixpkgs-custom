@@ -21,8 +21,8 @@ jobs:
         id: update-flake
         uses: DeterminateSystems/update-flake-lock@main
         with:
-          commit-msg: "bump: flake inputs"
-          pr-title: "bump: flake inputs"
+          commit-msg: "bump: flake.lock"
+          pr-title: "bump: flake.lock"
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
@@ -32,5 +32,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           PR_NUMBER: ${{ steps.update-flake.outputs.pull-request-number }}
-      - name: Test packages
-        run: "nix flake check"
+  check:
+    needs: lockfile
+    uses: ./.github/workflows/test-packages.yaml
