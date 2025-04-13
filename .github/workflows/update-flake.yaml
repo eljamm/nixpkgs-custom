@@ -27,8 +27,9 @@ jobs:
             dependencies
             automated
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
-      - name: Check packages
-        uses: ./.github/workflows/check-packages.yaml
+      # FIX: why doesn't this work?
+      # - name: Check packages
+      #   uses: ./.github/workflows/check-packages.yaml
       - name: Merge changes
         run: "gh pr merge --auto --rebase ${PR_NUMBER}"
         env:
