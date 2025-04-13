@@ -28,7 +28,7 @@ jobs:
             automated
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
       - name: Check packages
-        uses: ./.github/workflows/check-packages.yaml
+        uses: ./nixpkgs-custom/.github/workflows/check-packages.yaml
       - name: Merge changes
         run: "gh pr merge --auto --rebase ${PR_NUMBER}"
         env:
