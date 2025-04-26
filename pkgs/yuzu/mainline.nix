@@ -10,7 +10,7 @@
   fetchFromGitHub,
   wrapQtAppsHook,
   autoconf,
-  boost,
+  boost181,
   catch2_3,
   cmake,
   compat-list,
@@ -97,7 +97,7 @@ stdenv.mkDerivation (finalAttrs: {
     # don't get picked up by accident
     vulkan-headers
 
-    boost
+    boost181
     catch2_3
     cpp-jwt
     cubeb
@@ -227,6 +227,5 @@ stdenv.mkDerivation (finalAttrs: {
       sbruder
       k900
     ];
-    broken = true;
   };
 })
