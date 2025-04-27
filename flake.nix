@@ -7,6 +7,7 @@
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
 
     rustowl.url = "github:nix-community/rustowl-flake";
+    rustowl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
