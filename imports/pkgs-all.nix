@@ -19,6 +19,8 @@
         yuzu-ea = yuzuPackages.early-access;
         yuzu-early-access = yuzuPackages.early-access;
         yuzu-mainline = yuzuPackages.mainline;
+
+        inherit (inputs.rustowl.packages.${system}) rustowl;
       };
 
       checks = lib.filterAttrs (_: v: !v.meta.broken or false) self'.packages;
