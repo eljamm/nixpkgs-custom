@@ -65,11 +65,11 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "zen-browser-bin";
-  version = "1.11.5b";
+  version = "1.12.3b";
 
   src = fetchzip {
     url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-    hash = "sha256-Kk208Z1Uz0PPTKU8aYht6aGYeG1QGk8M0qnTEQ0nb9w=";
+    hash = "sha256-D6D+GIms/R2acQcirtJ6xkOmhSrUyaKp2aITVRxPkE8=";
   };
 
   desktopItems = [
@@ -99,10 +99,10 @@ stdenv.mkDerivation rec {
     ln -s $out/lib/zen/zen $out/bin/zen
 
     for n in {16,32,48,64,128}; do
-      size=$n"x"$n
-      mkdir -p $out/share/icons/hicolor/$size/apps
-      file="default"$n".png"
-      cp $out/lib/zen/browser/chrome/icons/default/$file $out/share/icons/hicolor/$size/apps/zen.png
+        size=$n"x"$n
+        mkdir -p $out/share/icons/hicolor/$size/apps
+        file="default"$n".png"
+        cp $out/lib/zen/browser/chrome/icons/default/$file $out/share/icons/hicolor/$size/apps/zen.png
     done
 
     runHook postInstall
