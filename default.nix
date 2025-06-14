@@ -32,6 +32,7 @@ rec {
   shell = pkgs.mkShellNoCC {
     packages = [
       formatter
+      pkgs.pinact # pin GH actions
     ];
   };
 }
