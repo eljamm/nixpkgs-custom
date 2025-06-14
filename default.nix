@@ -19,15 +19,18 @@ in
   },
   lib ? import "${sources.nixpkgs}/lib",
 }:
+let
+  args = {
+    inherit
+      lib
+      pkgs
+      system
+      sources
+      ;
+  };
+in
 rec {
-  inherit
-    lib
-    pkgs
-    system
-    sources
-    ;
-
-  formatter = import ./dev/formatter.nix { inherit pkgs sources system; };
+  formatter = import ./dev/formatter.nix args;
 
   shell = pkgs.mkShellNoCC {
     packages = [
@@ -36,12 +39,6 @@ rec {
     ];
   };
 
-  packages = import ./pkgs {
-    inherit
-      lib
-      pkgs
-      system
-      sources
-      ;
-  };
+  packages = import ./pkgs args;
 }
+// args
