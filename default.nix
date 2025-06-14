@@ -32,6 +32,10 @@ let
   formatter = import ./dev/formatter.nix args;
 
   default = {
+    inherit
+      formatter
+      ;
+
     shell = pkgs.mkShellNoCC {
       packages = [
         formatter
