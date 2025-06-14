@@ -10,6 +10,7 @@
     {
       config,
       system,
+      default,
       ...
     }:
     {
@@ -21,15 +22,11 @@
             allowBroken = true;
           };
         };
+        default = import ../default.nix { inherit self system; };
       };
 
       overlayAttrs = config.packages;
 
-      # TODO: refactor
-      formatter =
-        let
-          default = import ../default.nix { inherit self system; };
-        in
-        default.formatter;
+      formatter = default.formatter;
     };
 }
