@@ -6,6 +6,11 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
 
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks.url = "github:fricklerhandwerk/git-hooks";
+    git-hooks.flake = false;
+
     rustowl.url = "github:nix-community/rustowl-flake";
     rustowl.inputs.nixpkgs.follows = "nixpkgs";
   };

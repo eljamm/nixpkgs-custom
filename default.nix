@@ -26,4 +26,12 @@ rec {
     system
     sources
     ;
+
+  formatter = import ./dev/formatter.nix { inherit pkgs sources system; };
+
+  shell = pkgs.mkShellNoCC {
+    packages = [
+      formatter
+    ];
+  };
 }
