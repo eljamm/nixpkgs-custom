@@ -6,8 +6,6 @@
 }:
 lib.makeScope pkgs.newScope (
   self: with self; {
-    callPackage = self.newScope { };
-
     vocabsieve = callPackage ./vocabsieve/package.nix { };
 
     # from https://github.com/NixOS/nixpkgs/pull/295587
