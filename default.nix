@@ -28,17 +28,18 @@ let
       sources
       ;
   };
-in
-rec {
+
   formatter = import ./dev/formatter.nix args;
 
-  shell = pkgs.mkShellNoCC {
-    packages = [
-      formatter
-      pkgs.pinact # pin GH actions
-    ];
-  };
+  default = {
+    shell = pkgs.mkShellNoCC {
+      packages = [
+        formatter
+        pkgs.pinact # pin GH actions
+      ];
+    };
 
-  packages = import ./pkgs args;
-}
-// args
+    packages = import ./pkgs args;
+  };
+in
+default // args
