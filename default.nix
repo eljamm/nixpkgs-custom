@@ -7,10 +7,10 @@ let
     ;
 in
 {
-  flake ? import-flake {
+  self ? import-flake {
     src = ./.;
   },
-  sources ? flake.inputs,
+  sources ? self.inputs,
   system ? builtins.currentSystem,
   pkgs ? import sources.nixpkgs {
     config = { };

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 
 {
   imports = [
@@ -13,7 +13,6 @@
       ...
     }:
     {
-
       _module.args = {
         pkgs = import inputs.nixpkgs {
           inherit system;
@@ -25,5 +24,12 @@
       };
 
       overlayAttrs = config.packages;
+
+      # TODO: refactor
+      formatter =
+        let
+          default = import ../default.nix { inherit self system; };
+        in
+        default.formatter;
     };
 }
