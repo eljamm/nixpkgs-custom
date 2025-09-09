@@ -1,6 +1,7 @@
 name: Check packages
 on:
   push: { branches: ["master"] }
+  pull_request: { branches: ["master"] }
   workflow_call:
   workflow_dispatch:
 
