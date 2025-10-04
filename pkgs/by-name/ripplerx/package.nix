@@ -15,6 +15,8 @@
   libXinerama,
   libXrandr,
   nix-update-script,
+  makeDesktopItem,
+  copyDesktopItems,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -34,8 +36,8 @@ stdenv.mkDerivation (finalAttrs: {
   nativeBuildInputs = [
     cmake
     pkg-config
-    # fontconfig cache + $HOME/.{lv2,vst3}
-    writableTmpDirAsHomeHook
+    writableTmpDirAsHomeHook # fontconfig cache + $HOME/.{lv2,vst3}
+    copyDesktopItems
   ];
 
   buildInputs = [
@@ -50,9 +52,13 @@ stdenv.mkDerivation (finalAttrs: {
     libXrandr
   ];
 
-  cmakeFlags = [
-    (lib.cmakeFeature "BUILD_STANDALONE" "OFF") # doesn't start
-    (lib.cmakeFeature "CMAKE_BUILD_TYPE" "Release")
+  # JUCE dlopens these at runtime, standalone executable crashes without them
+  NIX_LDFLAGS = [
+    "-lX11"
+    "-lXext"
+    "-lXcursor"
+    "-lXinerama"
+    "-lXrandr"
   ];
 
   # Fontconfig error: Cannot load default config file: No such file: (null)
@@ -67,15 +73,36 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/lib/{lv2,vst3/RipplerX.vst3}
+    mkdir -p $out/bin $out/lib/{lv2,vst3}
 
     pushd RipplerX_artefacts/Release
+    cp -r "Standalone/RipplerX" $out/bin/ripplerx
     cp -r "LV2/RipplerX.lv2" $out/lib/lv2
-    cp -r "VST3/RipplerX.vst3"/* $out/lib/vst3
+    cp -r "VST3/RipplerX.vst3" $out/lib/vst3
     popd
+
+    install -Dm644 ../doc/logo.svg \
+      $out/share/icons/hicolor/scalable/apps/ripplerx.svg
 
     runHook postInstall
   '';
+
+  desktopItems = [
+    (makeDesktopItem {
+      desktopName = "RipplerX";
+      comment = "Physically modeled synth";
+      name = "ripplerx";
+      exec = "ripplerx";
+      icon = "ripplerx";
+      terminal = false;
+      categories = [
+        "Audio"
+        "AudioVideo"
+        "Midi"
+        "Music"
+      ];
+    })
+  ];
 
   passthru.updateScript = nix-update-script { };
 
@@ -85,6 +112,7 @@ stdenv.mkDerivation (finalAttrs: {
       RipplerX is a physically modeled synth, capable of sounds similar to AAS Chromaphone and Ableton Collision.
     '';
     homepage = "https://github.com/tiagolr/ripplerx";
+    mainProgram = "ripplerx";
     license = lib.licenses.gpl3Only;
     maintainers = with lib.maintainers; [ eljamm ];
     platforms = lib.platforms.linux;
