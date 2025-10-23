@@ -29,7 +29,6 @@ jobs:
           pr-labels: | # Labels to be set on the PR
             dependencies
             automated
-          token: ${{ secrets.GITHUB_TOKEN }}
       # FIX: why doesn't this work?
       # - name: Check packages
       #   uses: ./.github/workflows/check-packages.yaml
