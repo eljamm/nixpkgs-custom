@@ -13,14 +13,14 @@ let
 in
 python3Packages.buildPythonApplication rec {
   pname = "vocabsieve";
-  version = "0.12.4";
+  version = "0.12.5";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "FreeLanguageTools";
     repo = "vocabsieve";
     rev = "v${version}";
-    hash = "sha256-LTu/3I4blP72CaZo6o3fTDoufK9QNtSjE5umfvEpwAE=";
+    hash = "sha256-agLiHC3CrWeD2/mODdh3xmez0bPFKEovDcsVr0OY244=";
   };
 
   nativeBuildInputs = [
