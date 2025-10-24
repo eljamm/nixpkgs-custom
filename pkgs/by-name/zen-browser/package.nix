@@ -65,11 +65,11 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "zen-browser-bin";
-  version = "1.12.3b";
+  version = "1.17.2b";
 
   src = fetchzip {
     url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-    hash = "sha256-D6D+GIms/R2acQcirtJ6xkOmhSrUyaKp2aITVRxPkE8=";
+    hash = "sha256-QyeoVoX635DeJhSd4t6UFyQQdgAkEIYyf4LehUnEzqU=";
   };
 
   desktopItems = [
@@ -126,7 +126,6 @@ stdenv.mkDerivation rec {
   meta = {
     description = "Experience tranquillity while browsing the web without people tracking you!";
     license = lib.licenses.mpl20;
-    maintainers = with lib.maintainers; [ mordrag ];
     platforms = lib.platforms.linux;
     mainProgram = "zen";
   };
