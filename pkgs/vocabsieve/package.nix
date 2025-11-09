@@ -8,7 +8,12 @@
 let
   pyqtgraph5 = python3Packages.pyqtgraph.override {
     qt6 = qt5;
-    pyqt6 = python3Packages.pyqt5_with_qtmultimedia;
+    pyqt6 = python3Packages.pyqt5-multimedia;
+  };
+  # TODO: remove after:
+  # https://github.com/NixOS/nixpkgs/pull/454488
+  pymorphy3 = python3Packages.pymorphy3.overridePythonAttrs {
+    doCheck = false;
   };
 in
 python3Packages.buildPythonApplication rec {
@@ -56,7 +61,7 @@ python3Packages.buildPythonApplication rec {
     pymorphy3-dicts-ru
     pymorphy3-dicts-uk
     pynput
-    pyqt5_with_qtmultimedia
+    pyqt5-multimedia
     pyqtdarktheme
     pyqtgraph5
     pystardict
