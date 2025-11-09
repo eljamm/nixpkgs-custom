@@ -1,50 +1,42 @@
-let
-  flake-inputs = import (
-    fetchTarball "https://github.com/fricklerhandwerk/flake-inputs/tarball/4.1.0"
-  );
-  inherit (flake-inputs)
-    import-flake
-    ;
-in
 {
-  self ? import-flake {
-    src = ./.;
-  },
-  sources ? self.inputs,
+  self ? import ./dev/import-flake.nix { src = ./.; },
+  inputs ? self.inputs,
   system ? builtins.currentSystem,
-  pkgs ? import sources.nixpkgs {
-    config = { };
+  pkgs ? import inputs.nixpkgs {
+    config = {
+      allowBroken = true;
+    };
     overlays = [ ];
     inherit system;
   },
-  lib ? import "${sources.nixpkgs}/lib",
+  lib ? import "${inputs.nixpkgs}/lib",
 }:
-let
-  args = {
+lib.makeScope pkgs.newScope (
+  self': with self'; {
     inherit
       lib
       pkgs
+      self
       system
-      sources
-      ;
-  };
-
-  formatter = import ./dev/formatter.nix args;
-
-  default = {
-    inherit
-      formatter
+      inputs
       ;
 
-    shell = pkgs.mkShellNoCC {
+    format = callPackage ./dev/formatter.nix { };
+    custom-packages = callPackage ./pkgs { };
+    devShells.default = pkgs.mkShellNoCC {
       packages = [
-        formatter
+        format.formatter
         pkgs.pinact # pin GH actions
       ];
     };
 
-    packages = import ./pkgs args;
-    legacyPackages = default.packages;
-  };
-in
-default // args
+    flake = {
+      inherit devShells;
+      inherit (format) formatter;
+      packages = lib.filterAttrs (n: v: lib.isDerivation v) custom-packages;
+      checks = lib.filterAttrs (_: v: !v.meta.broken or false) flake.packages;
+      legacyPackages = custom-packages;
+      overlays.default = final: prev: flake.packages;
+    };
+  }
+)

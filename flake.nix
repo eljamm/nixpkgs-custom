@@ -3,8 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
+    flake-utils.url = "github:numtide/flake-utils";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,10 +15,14 @@
   };
 
   outputs =
-    inputs@{ flake-parts, nixpkgs, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = nixpkgs.lib.systems.flakeExposed;
-
-      imports = with builtins; map (fn: ./imports/${fn}) (attrNames (readDir ./imports));
+    { self, ... }@inputs:
+    let
+      # get flake attributes from default.nix
+      flake = system: (import ./default.nix { inherit self inputs system; }).flake;
+    in
+    inputs.flake-utils.lib.eachDefaultSystem flake
+    # system-agnostic
+    // {
+      overlays.default = final: prev: (flake builtins.currentSystem).packages;
     };
 }
