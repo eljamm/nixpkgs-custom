@@ -166,6 +166,9 @@ stdenv.mkDerivation (finalAttrs: {
     # We dont want to bother upstream with potentially outdated compat reports
     "-DYUZU_ENABLE_COMPATIBILITY_REPORTING=OFF"
     "-DENABLE_COMPATIBILITY_LIST_DOWNLOAD=OFF" # We provide this deterministically
+
+    # https://github.com/NixOS/nixpkgs/issues/445447
+    "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
   ];
 
   # Does some handrolled SIMD
