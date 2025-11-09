@@ -26,7 +26,6 @@
   libsepol,
   libsysprof-capture,
   libuuid,
-  libxdmcp,
   libxkbcommon,
   pcre2,
   portmidi,
@@ -103,7 +102,6 @@ stdenv.mkDerivation (finalAttrs: {
     alsa-lib
     libselinux
     libuuid
-    libxdmcp
     libsepol
   ]
   ++ lib.optionals withX11 [
