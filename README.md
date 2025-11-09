@@ -1,6 +1,6 @@
 # My Custom Nixpkgs Overlay
 
-This repository is built on the [my-own-nixpkgs](https://github.com/drupol/my-own-nixpkgs) template and serves as a collection for my custom Nix expressions, structured in a similar way as `nixpkgs`.
+This repository serves as a collection for my custom Nix expressions, structured in a similar way as `nixpkgs`.
 
 ## Usage
 
@@ -11,8 +11,6 @@ inputs = {
   nixpkgs-custom = {
     url = "github:eljamm/nixpkgs-custom";
     inputs.nixpkgs.follows = "nixpkgs";
-    # Uncomment this if your project uses flake-parts:
-    # inputs.flake-parts.follows = "flake-parts"; 
   };
 };
 ```
