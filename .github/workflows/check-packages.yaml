@@ -23,4 +23,4 @@ jobs:
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix') }}
           restore-prefixes-first-match: nix-${{ runner.os }}-
       - name: Check packages
-        run: "nix flake check -L"
+        run: "nix flake check -L --keep-going"
