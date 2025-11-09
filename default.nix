@@ -44,6 +44,7 @@ let
     };
 
     packages = import ./pkgs args;
+    legacyPackages = default.packages;
   };
 in
 default // args
