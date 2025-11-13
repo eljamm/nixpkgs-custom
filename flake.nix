@@ -14,15 +14,14 @@
     rustowl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  # construct flake from ./default.nix
   outputs =
     { self, ... }@inputs:
     let
-      # get flake attributes from default.nix
-      flake = system: (import ./default.nix { inherit self inputs system; }).flake;
+      inherit (inputs.flake-utils.lib) eachDefaultSystem eachDefaultSystemPassThrough;
+      importDefault = arg: (system: (import ./. { inherit self inputs system; }).flake.${arg} or { });
+      systemAgnosticFlake = eachDefaultSystemPassThrough (importDefault "systemAgnostic");
+      perSystemFlake = eachDefaultSystem (importDefault "perSystem");
     in
-    inputs.flake-utils.lib.eachDefaultSystem flake
-    # system-agnostic
-    // {
-      overlays.default = final: prev: (flake builtins.currentSystem).packages;
-    };
+    systemAgnosticFlake // perSystemFlake;
 }
