@@ -22,10 +22,9 @@ jobs:
           persist-credentials: false
       - name: Install Nix
         uses: nixbuild/nix-quick-install-action@5bb6a3b3abe66fd09bbf250dce8ada94f856a703 # v30
-      - name: Cache Nix
-        uses: nix-community/cache-nix-action@135667ec418502fa5a3598af6fb9eb733888ce6a # v6.1.3
+      - uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
         with:
-          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix') }}
-          restore-prefixes-first-match: nix-${{ runner.os }}-
+          name: eljamm
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: Check packages
         run: "nix flake check -L --keep-going"
