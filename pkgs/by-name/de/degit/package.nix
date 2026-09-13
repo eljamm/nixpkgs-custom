@@ -8,8 +8,8 @@
   writableTmpDirAsHomeHook,
 
   # internal
-  pkgs,
   devLib,
+  pkgs,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -129,7 +129,7 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   # degit: 2.8.4 -> 3.9.0
-  inNixpkgs = devLib.warnIfCond (devLib.isNewerOrSame pkgs.degit finalAttrs.finalPackage) "`degit` is now available in Nixpkgs: https://github.com/NixOS/nixpkgs/pull/558892";
+  inNixpkgs = devLib.warnIfCond (devLib.isNewerOrSame pkgs.degit finalAttrs.finalPackage) "${finalAttrs.pname} is now available in Nixpkgs: https://github.com/NixOS/nixpkgs/pull/558892";
 
   meta = {
     changelog = "https://github.com/Rich-Harris/degit/blob/${finalAttrs.src.rev}/docs/CHANGELOG.md";
