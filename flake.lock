@@ -102,10 +102,31 @@
         "type": "github"
       }
     },
+    "rom": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787139264,
+        "narHash": "sha256-l8pLaoaSxlqjc82UHQJ6oN5KquvbOXjJ++/EEPxNdKs=",
+        "owner": "manic-systems",
+        "repo": "rom",
+        "rev": "1902066137cdf83760c794bb7e149595a07a8e18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "manic-systems",
+        "repo": "rom",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
+        "rom": "rom",
         "rustowl": "rustowl",
         "treefmt-nix": "treefmt-nix"
       }

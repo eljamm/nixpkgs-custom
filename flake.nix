@@ -11,6 +11,9 @@
     rustowl.url = "github:nix-community/rustowl-flake";
     rustowl.inputs.nixpkgs.follows = "nixpkgs";
     rustowl.inputs.rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    rom.url = "github:manic-systems/rom";
+    rom.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # import flake attributes from ./flake/default.nix
