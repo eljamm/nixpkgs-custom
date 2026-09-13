@@ -23,7 +23,7 @@ lib.makeScope pkgs.newScope (
 
     devLib = callPackage ./dev/lib.nix { };
     format = callPackage ./dev/formatter.nix { };
-    custom-packages = lib.filterAttrs (n: v: lib.isDerivation v) (callPackage ./pkgs { });
+    customPkgs = lib.filterAttrs (n: v: lib.isDerivation v) (callPackage ./pkgs { });
     devShells.default = pkgs.mkShellNoCC {
       packages = [
         format.formatter
@@ -31,14 +31,14 @@ lib.makeScope pkgs.newScope (
       ];
     };
 
-    overlays.default = final: prev: custom-packages;
+    overlays.default = final: prev: customPkgs;
 
     flake.perSystem = {
       inherit devShells;
       inherit (format) formatter;
-      packages = custom-packages;
+      packages = customPkgs;
       checks = lib.filterAttrs (_: v: !v.meta.broken or false) flake.perSystem.packages;
-      legacyPackages = custom-packages;
+      legacyPackages = customPkgs;
     };
     flake.systemAgnostic = {
       inherit overlays;
