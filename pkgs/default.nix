@@ -19,7 +19,11 @@ lib.makeExtensible (
       yuzu-early-access = yuzu-packages.early-access;
       yuzu-mainline = yuzu-packages.mainline;
 
-      inherit (inputs.rustowl.packages.${system}) rustowl;
+      # https://github.com/manic-systems/rom
+      rom = inputs.rom.packages.${system}.default;
+
+      # https://github.com/nix-community/rustowl-flake
+      rustowl = inputs.rustowl.packages.${system}.default;
     }
     (callPackage ./by-name { })
   ]
