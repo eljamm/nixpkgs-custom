@@ -21,6 +21,7 @@ lib.makeScope pkgs.newScope (
       inputs
       ;
 
+    devLib = callPackage ./dev/lib.nix { };
     format = callPackage ./dev/formatter.nix { };
     custom-packages = lib.filterAttrs (n: v: lib.isDerivation v) (callPackage ./pkgs { });
     devShells.default = pkgs.mkShellNoCC {
