@@ -7,11 +7,10 @@
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks.url = "github:fricklerhandwerk/git-hooks";
-    git-hooks.flake = false;
 
     rustowl.url = "github:nix-community/rustowl-flake";
     rustowl.inputs.nixpkgs.follows = "nixpkgs";
+    rustowl.inputs.rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # import flake attributes from ./flake/default.nix
