@@ -7,13 +7,13 @@
 }:
 readest.overrideAttrs (
   finalAttrs: oldAttrs: {
-    version = "0.12.8";
+    version = "0.12.10";
 
     src = fetchFromGitHub {
       owner = "readest";
       repo = "readest";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-QPYqbmj3Gn7ghGyFfnaMx5g+ogi/Zs3eL8DmmwpwUNs=";
+      hash = "sha256-+gPuI2K3dJf+nVMPdYYGBj0rnjrMA8wu+CUs9WYI9EY=";
       fetchSubmodules = true;
     };
 
@@ -35,7 +35,7 @@ readest.overrideAttrs (
 
     cargoDeps = rustPlatform.fetchCargoVendor {
       inherit (finalAttrs) src;
-      hash = "sha256-+SDs/Da3ssM59ydJHCjr90gxYTHBYwik+mKS85ZqfCI=";
+      hash = "sha256-fkUL4CeCbT9XT9pB0Iixr7Gdl34RaHKEIRKFu/t7QA8=";
     };
   }
 )
