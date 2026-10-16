@@ -7,13 +7,13 @@
 }:
 readest.overrideAttrs (
   finalAttrs: oldAttrs: {
-    version = "0.12.12";
+    version = "0.12.16";
 
     src = fetchFromGitHub {
       owner = "readest";
       repo = "readest";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-nOqLdbBy/9tii5D8Qx1+DapHspkH/tBRlkApKiuKAZE=";
+      hash = "sha256-XNN66MB13yqHCvnBUgPmdghRnXA7Kz13E0j82EqxocU=";
       fetchSubmodules = true;
     };
 
@@ -21,7 +21,7 @@ readest.overrideAttrs (
       inherit (finalAttrs) pname version src;
       pnpm = pnpm_11;
       fetcherVersion = 4;
-      hash = "sha256-ZLCcnhA/QPJ/dmgXErF59vdfrKD5FFddtZ+148TvINM=";
+      hash = "sha256-LPm50VC7KU1wysxSUxwFZ7pNZutULct05NB5WgjmTws=";
       pnpmInstallFlags = [
         # Increase number of fetch attempts to work around timeout issues on slow
         # networks: "TimeoutError: The operation was aborted due to timeout".
