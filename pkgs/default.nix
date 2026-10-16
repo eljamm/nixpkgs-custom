@@ -32,7 +32,9 @@ lib.makeExtensible (
 
     # Aliases
     {
-      degit = lib.warnOnInstantiate "degit has been updated in Nixpkgs: https://github.com/NixOS/nixpkgs/pull/558892. Use that package instead of this one." pkgs.degit; # 2026-10-16
+      degit = lib.warnOnInstantiate "degit has been updated in Nixpkgs: https://github.com/NixOS/nixpkgs/pull/558892. Use that package instead of this one." pkgs.degit; # Added 2026-10-16
+
+      zen-browser = lib.warnOnInstantiate "zen-browser has been removed from this package set." pkgs.emptyFile; # Added 2026-10-16
     }
   ]
 )
