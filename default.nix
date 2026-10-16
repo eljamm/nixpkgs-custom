@@ -4,7 +4,7 @@
   system ? builtins.currentSystem,
   pkgs ? import inputs.nixpkgs {
     config = {
-      allowBroken = true;
+      # allowBroken = true;
     };
     overlays = [ ];
     inherit system;
@@ -24,7 +24,9 @@ let
 
       devLib = callPackage ./dev/lib.nix { };
       format = callPackage ./dev/formatter.nix { };
-      customPkgs = lib.filterAttrs (n: v: lib.isDerivation v) (callPackage ./pkgs { });
+      customPkgs = lib.filterAttrs (n: v: lib.isDerivation v && !v.meta.broken or false) (
+        callPackage ./pkgs { }
+      );
       devShells.default = pkgs.mkShellNoCC {
         packages = [
           format.formatter

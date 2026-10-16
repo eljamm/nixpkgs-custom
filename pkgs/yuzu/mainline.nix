@@ -201,7 +201,7 @@ stdenv.mkDerivation (finalAttrs: {
     install -Dm444 $src/dist/72-yuzu-input.rules $out/lib/udev/rules.d/72-yuzu-input.rules
   '';
 
-  meta = with lib; {
+  meta = {
     homepage = "https://yuzu-emu.org";
     changelog = "https://yuzu-emu.org/entry";
     description = "An experimental Nintendo Switch emulator written in C++";
@@ -215,14 +215,14 @@ stdenv.mkDerivation (finalAttrs: {
       "aarch64-linux"
       "x86_64-linux"
     ];
-    license = with licenses; [
+    license = with lib.licenses; [
       gpl3Plus
       # Icons
       asl20
       mit
       cc0
     ];
-    maintainers = with maintainers; [
+    maintainers = with lib.maintainers; [
       ashley
       atemu # Maintains yuzu until a new fork is established
       ivar
