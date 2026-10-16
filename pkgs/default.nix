@@ -11,6 +11,10 @@ lib.makeExtensible (
   self':
   with self';
   lib.mergeAttrsList [
+    # Automatic
+    (callPackage ./by-name { })
+
+    # Manual
     {
       # from https://github.com/NixOS/nixpkgs/pull/295587
       yuzu-packages = callPackage ./yuzu { };
@@ -25,6 +29,10 @@ lib.makeExtensible (
       # https://github.com/nix-community/rustowl-flake
       rustowl = inputs.rustowl.packages.${system}.default;
     }
-    (callPackage ./by-name { })
+
+    # Aliases
+    {
+      degit = lib.warnOnInstantiate "degit has been updated in Nixpkgs: https://github.com/NixOS/nixpkgs/pull/558892. Use that package instead of this one." pkgs.degit; # 2026-10-16
+    }
   ]
 )
