@@ -4,7 +4,7 @@
 }:
 
 pkgs.symlinkJoin (finalAttrs: {
-  pname = "anki-custom";
+  pname = "anki";
   version = "26.09.3";
 
   paths = [
